@@ -9,6 +9,9 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  experimental: {
+    // Any experimental features if needed
+  },
 }
 
 export default nextConfig
