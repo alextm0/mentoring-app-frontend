@@ -130,3 +130,24 @@
 .slide-up {
   animation: slide-up 0.3s ease-out;
 }
+
+/* Code Editor Font Styling */
+.code-editor-container .ace_editor,
+.code-editor-container .ace_content,
+.code-editor-container .ace_text-input {
+  font-family: 'JetBrains Mono', 'JetBrainsMono Nerd Font', 'Fira Code', 'Cascadia Code', 'SF Mono', 'Monaco', 'Inconsolata', 'Liberation Mono', 'Menlo', 'Roboto Mono', 'Consolas', 'Ubuntu Mono', monospace !important;
+}
+
+/* Code Editor Line Height - JetBrains IDE Style */
+.code-editor-container .ace_line,
+.code-editor-container .ace_line_group {
+  line-height: 1.4 !important;
+}
+
+.code-editor-container .ace_content {
+  line-height: 1.4 !important;
+}
+
+.code-editor-container .ace_text-layer {
+  line-height: 1.4 !important;
+}

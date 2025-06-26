@@ -8,9 +8,8 @@ import { MenteesList } from "@/components/mentor/mentees-list"
 import { SessionScheduler } from "@/components/mentor/session-scheduler"
 import { RoadmapPlanner } from "@/components/mentor/roadmap-planner"
 import { MenteeDetail } from "@/components/mentor/mentee-detail"
-import { CodeReviewSimple } from "@/components/mentor/code-review-simple"
+import CodeReviewSimple from "@/components/mentor/code-review-simple"
 import { MentorProfile } from "@/components/mentor/mentor-profile"
-import { QuickAddFAB } from "@/components/quick-add-fab"
 
 export default function MentorDashboard() {
   const [activeTab, setActiveTab] = useState("overview")
@@ -57,7 +56,6 @@ export default function MentorDashboard() {
     <div className="min-h-screen bg-background">
       <MentorNavigation activeTab={activeTab} onTabChange={setActiveTab} />
       <main className="max-w-7xl mx-auto px-6 py-8">{renderContent()}</main>
-      <QuickAddFAB />
     </div>
   )
 }

@@ -1,11 +1,12 @@
 "use client"
 
 import { useState } from "react"
+import { motion } from "framer-motion"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Calendar, Clock, Video, CheckCircle, CircleDot } from "lucide-react"
+import { Calendar, Clock, Video, CheckCircle, CircleDot, ArrowRight } from "lucide-react"
 
 export function MenteeSessionsSimple() {
   const [showPastSessions, setShowPastSessions] = useState(false)
@@ -120,8 +121,13 @@ export function MenteeSessionsSimple() {
     if (diffDays === 0) return "Today"
     if (diffDays === 1) return "Tomorrow"
     if (diffDays > 0) return `In ${diffDays} days`
-    return "Past"
+    return "In 2 days"
   }
+
+  // Get next session (closest upcoming)
+  const nextSession = upcomingSessions.sort((a, b) => 
+    new Date(a.date).getTime() - new Date(b.date).getTime()
+  )[0]
 
   if (showPastSessions) {
     return (
@@ -181,116 +187,144 @@ export function MenteeSessionsSimple() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold">My Sessions</h1>
-          <p className="text-muted-foreground">View your mentoring sessions and upcoming meetings</p>
-        </div>
-        <Button variant="outline" onClick={() => setShowPastSessions(true)}>
-          View Past Sessions
-        </Button>
-      </div>
-
-      {/* Stats Cards */}
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-        <Card>
-          <CardContent className="p-4 text-center">
-            <div className="text-2xl font-bold text-primary">{upcomingSessions.length}</div>
-            <div className="text-sm text-muted-foreground">Upcoming</div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="p-4 text-center">
-            <div className="text-2xl font-bold text-blue-500">{pastSessions.length}</div>
-            <div className="text-sm text-muted-foreground">Completed</div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="p-4 text-center">
-            <div className="text-2xl font-bold text-green-500">
-              {Math.round(pastSessions.length / (pastSessions.length + upcomingSessions.length) * 100)}%
+      {/* Welcome Header */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="relative overflow-hidden"
+      >
+        <Card className="border shadow-sm">
+          <CardContent className="p-8">
+            <div className="flex items-center justify-between">
+              <div>
+                <h1 className="text-3xl font-bold mb-2">My Sessions 📅</h1>
+                <p className="text-muted-foreground">Your mentoring journey and upcoming meetings</p>
+              </div>
+              <Button variant="outline" onClick={() => setShowPastSessions(true)} className="gap-2">
+                <Calendar className="h-4 w-4" />
+                View Past Sessions
+              </Button>
             </div>
-            <div className="text-sm text-muted-foreground">Attendance</div>
           </CardContent>
         </Card>
-      </div>
+      </motion.div>
 
-      {/* Upcoming Sessions */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Calendar className="h-5 w-5" />
-            Upcoming Sessions
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          {upcomingSessions.length === 0 ? (
-            <div className="text-center py-8">
-              <Calendar className="h-12 w-12 mx-auto text-muted-foreground/30 mb-4" />
-              <p className="text-muted-foreground">No upcoming sessions</p>
-              <p className="text-sm text-muted-foreground mt-2">
-                Contact your mentor to schedule your next session
-              </p>
-            </div>
-          ) : (
-            <div className="space-y-4">
-              {upcomingSessions.map((session) => (
-                <div key={session.id} className="p-4 bg-muted/30 rounded-lg border">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-4">
-                      <Avatar className="h-12 w-12">
-                        <AvatarImage src={session.avatar} />
-                        <AvatarFallback>
-                          {session.mentor.split(' ').map(n => n[0]).join('')}
-                        </AvatarFallback>
-                      </Avatar>
-                      <div>
-                        <h3 className="font-semibold text-lg mb-1">{session.topic}</h3>
-                        <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                          <span className="flex items-center gap-1">
-                            <Calendar className="h-3 w-3" />
-                            {formatDate(session.date)}
-                          </span>
-                          <span className="flex items-center gap-1">
-                            <Clock className="h-3 w-3" />
-                            {session.time} • {session.duration} min
-                          </span>
-                          <span>with {session.mentor}</span>
-                        </div>
-                        <div className="flex items-center gap-2 mt-2">
-                          <Badge variant="outline" className={getStatusColor(session.status)}>
-                            <div className="flex items-center gap-1">
-                              {getStatusIcon(session.status)}
-                              {session.status}
-                            </div>
-                          </Badge>
-                          <span className="text-sm text-muted-foreground">
-                            {getDaysUntilSession(session.date)}
-                          </span>
-                        </div>
-                      </div>
+      {/* Today's Focus - Next Session & Upcoming Sessions */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Next Session */}
+        <Card className="border shadow-sm">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Clock className="h-5 w-5 text-blue-500" />
+              Next Session
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="p-6">
+            {nextSession ? (
+              <div className="flex items-start gap-4">
+                <Avatar className="h-14 w-14">
+                  <AvatarImage src={nextSession.avatar} />
+                  <AvatarFallback>
+                    {nextSession.mentor.split(' ').map(n => n[0]).join('')}
+                  </AvatarFallback>
+                </Avatar>
+                <div className="flex-1 space-y-3">
+                  <div>
+                    <h3 className="font-semibold text-lg mb-1">{nextSession.topic}</h3>
+                    <p className="text-sm text-muted-foreground mb-2">
+                      with {nextSession.mentor}
+                    </p>
+                  </div>
+                  
+                  <div className="flex items-center gap-3 text-sm">
+                    <div className="flex items-center gap-1">
+                      <Calendar className="h-4 w-4 text-muted-foreground" />
+                      <span>{formatDate(nextSession.date)}</span>
                     </div>
-                    
-                    <div className="flex items-center gap-2">
-                      {session.meetingLink && session.status === 'confirmed' && (
-                        <Button size="sm" className="gap-2">
-                          <Video className="h-4 w-4" />
-                          Join Session
-                        </Button>
-                      )}
-                      {session.status === 'pending' && (
-                        <Button size="sm" variant="outline" disabled>
-                          Awaiting Confirmation
-                        </Button>
-                      )}
+                    <div className="flex items-center gap-1">
+                      <Clock className="h-4 w-4 text-muted-foreground" />
+                      <span>{nextSession.time}</span>
                     </div>
                   </div>
+                  
+                  <div className="flex items-center gap-2">
+                    <Badge variant="outline" className={getStatusColor(nextSession.status)}>
+                      <div className="flex items-center gap-1">
+                        {getStatusIcon(nextSession.status)}
+                        {nextSession.status}
+                      </div>
+                    </Badge>
+                    <Badge variant="secondary" className="text-xs">
+                      {getDaysUntilSession(nextSession.date)}
+                    </Badge>
+                  </div>
                 </div>
-              ))}
-            </div>
-          )}
-        </CardContent>
-      </Card>
+              </div>
+            ) : (
+              <div className="text-center py-8">
+                <Calendar className="h-12 w-12 mx-auto text-muted-foreground/30 mb-4" />
+                <p className="text-muted-foreground mb-4">No upcoming sessions</p>
+                <p className="text-sm text-muted-foreground">
+                  Reach out to your mentor to schedule your next learning session
+                </p>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+
+        {/* All Upcoming Sessions */}
+        <Card className="border shadow-sm">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Calendar className="h-5 w-5 text-purple-500" />
+              Upcoming Sessions
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            {upcomingSessions.length > 0 ? (
+              <div className="space-y-3">
+                {upcomingSessions.slice(0, 3).map((session) => (
+                  <div key={session.id} className="flex items-center gap-3 p-3 bg-muted/50 rounded-lg">
+                    <Avatar className="h-10 w-10">
+                      <AvatarImage src={session.avatar} />
+                      <AvatarFallback>
+                        {session.mentor.split(' ').map(n => n[0]).join('')}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div className="flex-1">
+                      <h5 className="font-medium text-sm">{session.topic}</h5>
+                      <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                        <span>{formatDate(session.date)}</span>
+                        <span>•</span>
+                        <span>{session.time}</span>
+                        <Badge variant="outline" className={`text-xs ${getStatusColor(session.status)}`}>
+                          {session.status}
+                        </Badge>
+                      </div>
+                    </div>
+                    <span className="text-xs text-muted-foreground">
+                      {getDaysUntilSession(session.date)}
+                    </span>
+                  </div>
+                ))}
+                {upcomingSessions.length > 3 && (
+                  <Button className="w-full" variant="outline" size="sm">
+                    View All Sessions
+                  </Button>
+                )}
+              </div>
+            ) : (
+              <div className="text-center py-8">
+                <CheckCircle className="h-12 w-12 mx-auto text-green-500/30 mb-4" />
+                <p className="text-muted-foreground">No upcoming sessions scheduled</p>
+                <p className="text-sm text-muted-foreground mt-2">
+                  Contact your mentor to plan your next session
+                </p>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      </div>
     </div>
   )
 } 

@@ -26,9 +26,10 @@ import { useToast } from "@/hooks/use-toast"
 
 interface MenteeAssignmentsRedesignedProps {
   onViewSubmission?: (submissionId: number) => void
+  onSubmitProblem?: (problemId: number) => void
 }
 
-export function MenteeAssignmentsRedesigned({ onViewSubmission }: MenteeAssignmentsRedesignedProps) {
+export function MenteeAssignmentsRedesigned({ onViewSubmission, onSubmitProblem }: MenteeAssignmentsRedesignedProps) {
   const { toast } = useToast()
   const [submissionCode, setSubmissionCode] = useState("")
   const [submissionNotes, setSubmissionNotes] = useState("")
@@ -443,82 +444,14 @@ export function MenteeAssignmentsRedesigned({ onViewSubmission }: MenteeAssignme
                             </Button>
                           )
                         ) : (
-                          <Sheet open={showSubmitDrawer && selectedProblem === problem.id} 
-                                 onOpenChange={(open) => {
-                                   setShowSubmitDrawer(open)
-                                   if (!open) setSelectedProblem(null)
-                                 }}>
-                            <SheetTrigger asChild>
-                              <Button
-                                size="sm"
-                                className="gap-2"
-                                onClick={() => setSelectedProblem(problem.id)}
-                              >
-                                <Upload className="h-3 w-3" />
-                                Submit
-                              </Button>
-                            </SheetTrigger>
-                            <SheetContent className="sm:max-w-md">
-                              <SheetHeader>
-                                <SheetTitle>Submit Solution</SheetTitle>
-                              </SheetHeader>
-                              <div className="space-y-4 mt-6">
-                                <div>
-                                  <h4 className="font-medium mb-2">{problem.title}</h4>
-                                  <div className="flex gap-2 mb-3">
-                                    <Badge variant="outline" className={getDifficultyColor(problem.difficulty)}>
-                                      {problem.difficulty}
-                                    </Badge>
-                                    <Badge variant="outline" className="bg-purple-500/10 text-purple-500">
-                                      {problem.xp} XP
-                                    </Badge>
-                                  </div>
-                                </div>
-                                
-                                <div className="space-y-2">
-                                  <Label htmlFor="code">Your Solution</Label>
-                                  <Textarea
-                                    id="code"
-                                    placeholder="Paste your code solution here..."
-                                    value={submissionCode}
-                                    onChange={(e) => setSubmissionCode(e.target.value)}
-                                    rows={12}
-                                    className="font-mono text-sm"
-                                  />
-                                </div>
-                                
-                                <div className="space-y-2">
-                                  <Label htmlFor="notes">Notes (Optional)</Label>
-                                  <Textarea
-                                    id="notes"
-                                    placeholder="Any thoughts about your approach..."
-                                    value={submissionNotes}
-                                    onChange={(e) => setSubmissionNotes(e.target.value)}
-                                    rows={3}
-                                  />
-                                </div>
-                                
-                                <div className="flex gap-2 pt-4">
-                                  <Button 
-                                    onClick={() => handleSubmit(problem.id)}
-                                    className="flex-1 gap-2"
-                                  >
-                                    <Code2 className="h-4 w-4" />
-                                    Submit Solution
-                                  </Button>
-                                  <Button 
-                                    variant="outline"
-                                    onClick={() => {
-                                      setShowSubmitDrawer(false)
-                                      setSelectedProblem(null)
-                                    }}
-                                  >
-                                    Cancel
-                                  </Button>
-                                </div>
-                              </div>
-                            </SheetContent>
-                          </Sheet>
+                          <Button
+                            size="sm"
+                            className="gap-2"
+                            onClick={() => onSubmitProblem?.(problem.id)}
+                          >
+                            <Upload className="h-3 w-3" />
+                            Submit
+                          </Button>
                         )}
                       </div>
                     </div>

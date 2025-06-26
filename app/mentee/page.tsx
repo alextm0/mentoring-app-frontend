@@ -8,13 +8,20 @@ import { MenteeAssignmentsRedesigned } from "@/components/mentee/mentee-assignme
 import { MenteeSessionsSimple } from "@/components/mentee/mentee-sessions-simple"
 import { MenteeProfile } from "@/components/mentee/mentee-profile"
 import { CodeSubmission } from "@/components/mentee/code-submission"
+import CodeSubmissionCreate from "@/components/mentee/code-submission-create"
 import { MenteeRoadmap } from "@/components/mentee/mentee-roadmap"
 
 export default function MenteeDashboard() {
   const [activeTab, setActiveTab] = useState("overview")
   const [selectedSubmissionId, setSelectedSubmissionId] = useState<number | null>(null)
+  const [selectedProblemId, setSelectedProblemId] = useState<number | null>(null)
 
   const renderContent = () => {
+    // Code Submission Create View
+    if (selectedProblemId) {
+      return <CodeSubmissionCreate problemId={selectedProblemId} onBack={() => setSelectedProblemId(null)} />
+    }
+
     // Code Submission View
     if (selectedSubmissionId) {
       return <CodeSubmission submissionId={selectedSubmissionId} onBack={() => setSelectedSubmissionId(null)} />
@@ -25,7 +32,10 @@ export default function MenteeDashboard() {
       case "overview":
         return <MenteeOverview />
       case "assignments":
-        return <MenteeAssignmentsRedesigned onViewSubmission={(submissionId: number) => setSelectedSubmissionId(submissionId)} />
+        return <MenteeAssignmentsRedesigned 
+          onViewSubmission={(submissionId: number) => setSelectedSubmissionId(submissionId)}
+          onSubmitProblem={(problemId: number) => setSelectedProblemId(problemId)}
+        />
       case "sessions":
         return <MenteeSessionsSimple />
       case "roadmap":

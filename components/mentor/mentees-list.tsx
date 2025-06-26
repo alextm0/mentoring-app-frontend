@@ -3,7 +3,6 @@
 import { useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Progress } from "@/components/ui/progress"
@@ -12,7 +11,8 @@ import {
   Calendar, 
   Eye, 
   Users,
-  Plus
+  Plus,
+  Clock
 } from "lucide-react"
 
 interface MenteesListProps {
@@ -82,7 +82,7 @@ export function MenteesList({ onSelectMentee }: MenteesListProps) {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold">My Mentees</h1>
-          <p className="text-muted-foreground">Manage your mentees</p>
+          <p className="text-muted-foreground">Manage your mentees and track their progress</p>
         </div>
         <Button className="gap-2">
           <Plus className="h-4 w-4" />
@@ -106,59 +106,58 @@ export function MenteesList({ onSelectMentee }: MenteesListProps) {
       </Card>
 
       {/* Mentees Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredMentees.map((mentee) => (
-          <Card key={mentee.id} className="hover:shadow-md transition-shadow">
-            <CardContent className="p-4">
+          <Card key={mentee.id} className="hover:shadow-md transition-shadow duration-200">
+            <CardContent className="p-6">
               {/* Header */}
-              <div className="flex items-center gap-3 mb-3">
-                <Avatar className="h-10 w-10">
+              <div className="flex items-center gap-3 mb-4">
+                <Avatar className="h-12 w-12">
                   <AvatarImage src={mentee.avatar} />
-                  <AvatarFallback>
+                  <AvatarFallback className="bg-primary/10 text-primary font-medium">
                     {mentee.name.split(" ").map((n) => n[0]).join("")}
                   </AvatarFallback>
                 </Avatar>
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-semibold truncate">{mentee.name}</h3>
+                  <h3 className="font-semibold text-base truncate">{mentee.name}</h3>
                   <p className="text-sm text-muted-foreground truncate">{mentee.email}</p>
                 </div>
               </div>
 
               {/* Progress */}
-              <div className="mb-3">
-                <div className="flex items-center justify-between mb-1">
+              <div className="mb-4">
+                <div className="flex items-center justify-between mb-2">
                   <span className="text-sm font-medium">Progress</span>
-                  <span className="text-xs text-muted-foreground">
+                  <span className="text-sm text-muted-foreground">
                     {mentee.completedTasks}/{mentee.totalTasks}
                   </span>
                 </div>
-                <Progress value={mentee.progress} className="h-1.5" />
+                <Progress value={mentee.progress} className="h-2" />
               </div>
 
               {/* Next Session */}
-              <div className="mb-4">
-                <div className="flex items-center gap-1 mb-1">
-                  <Calendar className="h-3 w-3 text-muted-foreground" />
-                  <span className="text-xs font-medium">Next Session</span>
+              <div className="mb-6">
+                <div className="flex items-center gap-2 mb-1">
+                  <Clock className="h-4 w-4 text-muted-foreground" />
+                  <span className="text-sm font-medium">Next Session</span>
                 </div>
-                <p className="text-xs text-muted-foreground">
+                <p className="text-sm text-muted-foreground pl-6">
                   {mentee.nextSession}
                 </p>
               </div>
 
               {/* Actions */}
-              <div className="flex gap-2">
+              <div className="flex gap-3">
                 <Button 
                   size="sm" 
-                  className="flex-1 text-xs h-8" 
+                  className="flex-1" 
                   onClick={() => onSelectMentee(mentee.id)}
                 >
-                  <Eye className="h-3 w-3 mr-1" />
+                  <Eye className="h-4 w-4 mr-2" />
                   View
                 </Button>
-                <Button size="sm" variant="outline" className="text-xs h-8">
-                  <Calendar className="h-3 w-3 mr-1" />
-                  Schedule
+                <Button size="sm" variant="outline">
+                  <Calendar className="h-4 w-4" />
                 </Button>
               </div>
             </CardContent>
