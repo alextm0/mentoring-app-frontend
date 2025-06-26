@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -20,7 +21,9 @@ import {
   Play,
   Target,
   Trophy,
-  Users
+  Users,
+
+  Star
 } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 
@@ -107,7 +110,6 @@ export function MenteeAssignmentsRedesigned({ onViewSubmission, onSubmitProblem 
         {
           id: 1,
           title: "Binary Search Algorithm Guide",
-          type: "article",
           url: "https://example.com/binary-search-guide",
           description: "Comprehensive guide covering implementation and edge cases",
           completed: true
@@ -115,7 +117,6 @@ export function MenteeAssignmentsRedesigned({ onViewSubmission, onSubmitProblem 
         {
           id: 2,
           title: "Binary Search Visualization",
-          type: "interactive",
           url: "https://visualgo.net/en/bst",
           description: "Interactive visualization of binary search in action",
           completed: false
@@ -180,7 +181,6 @@ export function MenteeAssignmentsRedesigned({ onViewSubmission, onSubmitProblem 
         {
           id: 3,
           title: "Graph Theory Fundamentals",
-          type: "video",
           url: "https://youtube.com/watch?v=example",
           description: "45-minute video covering graph representation and traversal",
           completed: false
@@ -188,7 +188,6 @@ export function MenteeAssignmentsRedesigned({ onViewSubmission, onSubmitProblem 
         {
           id: 4,
           title: "DFS vs BFS Comparison",
-          type: "article",
           url: "https://example.com/dfs-vs-bfs",
           description: "When to use depth-first vs breadth-first search",
           completed: false
@@ -243,7 +242,6 @@ export function MenteeAssignmentsRedesigned({ onViewSubmission, onSubmitProblem 
         {
           id: 5,
           title: "Dynamic Programming Patterns",
-          type: "pdf",
           url: "https://example.com/dp-patterns.pdf",
           description: "Common DP patterns with examples and practice problems",
           completed: true
@@ -274,14 +272,8 @@ export function MenteeAssignmentsRedesigned({ onViewSubmission, onSubmitProblem 
     }
   }
 
-  const getResourceIcon = (type: string) => {
-    switch (type) {
-      case "video": return "🎥"
-      case "article": return "📄"
-      case "pdf": return "📋"
-      case "interactive": return "🎮"
-      default: return "📚"
-    }
+  const getResourceIcon = () => {
+    return <BookOpen className="h-4 w-4 text-muted-foreground" />
   }
 
   const getDaysUntilDue = (dateStr: string) => {
@@ -498,26 +490,65 @@ export function MenteeAssignmentsRedesigned({ onViewSubmission, onSubmitProblem 
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
-                {assignment.resources.map((resource) => (
-                  <div key={resource.id} className={`p-3 rounded-lg border ${
-                    resource.completed ? "bg-green-500/5 border-green-500/20" : "bg-muted/30 border-border"
-                  }`}>
-                    <div className="flex items-start gap-3">
-                      <span className="text-lg">{getResourceIcon(resource.type)}</span>
-                      <div className="flex-1">
-                        <h5 className="font-medium text-sm">{resource.title}</h5>
-                        <p className="text-xs text-muted-foreground mb-2">{resource.description}</p>
-                        <Button size="sm" variant="outline" className="gap-2 h-7">
-                          <ExternalLink className="h-3 w-3" />
-                          {resource.completed ? "Review" : "Study"}
-                        </Button>
+                {assignment.resources.map((resource) => {
+                  const ResourceComponent = (
+                    <div className={`p-4 rounded-lg border transition-all cursor-pointer ${
+                      resource.completed ? "bg-green-500/5 border-green-500/20" : "bg-muted/30 border-border hover:bg-muted/50"
+                    }`}>
+                      <div className="flex items-center space-x-4">
+                        <div className="flex-shrink-0 w-8 h-8 rounded-md bg-muted/50 flex items-center justify-center">
+                          {getResourceIcon()}
+                        </div>
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2">
+                            <h5 className="text-sm font-medium">{resource.title}</h5>
+                            {resource.url && (
+                              <span title="Opens in external site">
+                                <ExternalLink className="h-3 w-3 text-blue-400" />
+                              </span>
+                            )}
+                            {resource.completed && (
+                              <CheckCircle className="h-3 w-3 text-green-400" />
+                            )}
+                          </div>
+                          {resource.description && (
+                            <p className="text-xs text-muted-foreground mt-2">
+                              {resource.description}
+                            </p>
+                          )}
+                        </div>
                       </div>
-                      {resource.completed && (
-                        <CheckCircle className="h-4 w-4 text-green-500 mt-1" />
-                      )}
+                      <div className="flex items-center space-x-2 flex-shrink-0">
+                        {resource.completed && (
+                          <Badge className="bg-green-500/20 text-green-400 border-green-500/30 text-xs">
+                            Done
+                          </Badge>
+                        )}
+                        {!resource.completed && (
+                          <Button size="sm" variant="outline" className="h-7 text-xs">
+                            {resource.completed ? "Review" : "Study"}
+                          </Button>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  )
+                  
+                  return resource.url ? (
+                    <Link 
+                      key={resource.id}
+                      href={resource.url} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="block"
+                    >
+                      {ResourceComponent}
+                    </Link>
+                  ) : (
+                    <div key={resource.id}>
+                      {ResourceComponent}
+                    </div>
+                  )
+                })}
               </CardContent>
             </Card>
           </div>

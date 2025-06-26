@@ -1,261 +1,405 @@
-import { RoadmapData } from "@/components/roadmap/shared-types"
+import { RoadmapTemplate } from "@/components/roadmap/shared-types"
 
-export const competitiveProgrammingRoadmap: RoadmapData = {
+export const programmingRoadmapTemplate: RoadmapTemplate = {
   id: 1,
-  title: "Competitive Programming Mastery",
-  description: "Complete journey from algorithms to advanced competitive programming techniques",
-  totalPhases: 6,
-  totalProblems: 180,
+  title: "Programming Fundamentals",
+  description: "Master essential programming concepts through hands-on problems and comprehensive resources",
+  difficulty: "Beginner",
   phases: [
     {
       id: 1,
-      title: "Foundation",
-      status: "completed",
-      problems: 25,
-      completedProblems: 25,
-      description: "Master the fundamentals of programming and basic problem-solving",
+      title: "Foundations",
+      status: "available",
+      description: "Learn programming basics and fundamental concepts",
       topics: [
         { 
           id: 1, 
-          title: "Time & Space Complexity", 
-          progress: 100, 
-          difficulty: "Easy", 
-          problems: 8, 
-          completedProblems: 8, 
-          locked: false,
-          resources: ["Big O Notation Guide", "Time Complexity Analysis", "Space Complexity Basics"]
+          title: "Variables & Data Types",
+          status: "available",
+          difficulty: "Easy",
+          description: "Understanding basic programming constructs and how to store and manipulate data",
+          problems: [
+            {
+              id: 1,
+              title: "Variable Declaration Practice",
+              description: "Create variables of different types and perform basic operations",
+              difficulty: "Easy", 
+              status: "not_started",
+              isImportant: true,
+              externalUrl: "https://codewars.com/kata/variable-practice"
+            },
+            { 
+              id: 2, 
+              title: "Type Conversion Challenge",
+              description: "Convert between different data types and understand implicit vs explicit conversion",
+              difficulty: "Easy", 
+              status: "not_started",
+              externalUrl: "https://leetcode.com/problems/type-conversion"
+            }
+          ],
+          resources: [
+            {
+              id: 1,
+              title: "Variables Explained",
+              description: "Complete guide to variables and data types",
+              isRequired: true,
+              isImportant: true,
+              url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types"
+            },
+            { 
+              id: 2,
+              title: "Data Types in Programming",
+              description: "Visual explanation of primitive and complex data types",
+              isRequired: true,
+              url: "https://www.youtube.com/watch?v=example"
+            },
+            {
+              id: 3,
+              title: "Interactive Type Practice",
+              description: "Hands-on exercises with immediate feedback",
+              isRequired: false,
+              url: "https://codewars.com/kata/variables-practice"
+            }
+          ]
         },
-        { 
-          id: 2, 
-          title: "Arrays & Strings", 
-          progress: 100, 
-          difficulty: "Easy", 
-          problems: 12, 
-          completedProblems: 12, 
-          locked: false,
-          resources: ["Array Manipulation Techniques", "String Algorithms", "Two Pointer Technique"]
+        {
+          id: 2,
+          title: "Control Flow",
+          status: "available",
+          difficulty: "Easy",
+          description: "Master conditional statements, loops, and program flow control",
+          problems: [
+            {
+              id: 4,
+              title: "If-Else Logic Builder",
+              description: "Create a program that makes decisions based on user input",
+              difficulty: "Easy",
+              status: "not_started",
+              externalUrl: "https://codewars.com/kata/if-else-practice"
+            },
+            { 
+              id: 5, 
+              title: "Loop Patterns",
+              description: "Implement different types of loops for various scenarios",
+              difficulty: "Medium",
+              status: "not_started",
+              externalUrl: "https://hackerrank.com/challenges/loops-practice"
+            },
+            { 
+              id: 6, 
+              title: "Nested Control Structures",
+              description: "Combine loops and conditionals to solve complex problems",
+              difficulty: "Medium", 
+              status: "not_started",
+              externalUrl: "https://leetcode.com/problems/nested-loops"
+            },
+            { 
+              id: 7, 
+              title: "Control Flow Challenge",
+              description: "Build a number guessing game using everything you've learned",
+              difficulty: "Medium", 
+              status: "not_started",
+              externalUrl: "https://hackerrank.com/challenges/guessing-game"
+            }
+          ],
+          resources: [
+            {
+              id: 4,
+              title: "Conditional Statements Guide",
+              description: "Comprehensive guide to if-else statements and switch cases",
+              isRequired: true,
+              url: "https://javascript.info/ifelse"
+            },
+            { 
+              id: 5,
+              title: "Loops Masterclass",
+              description: "Everything you need to know about for, while, and do-while loops",
+              isRequired: true,
+              url: "https://www.youtube.com/watch?v=loops-example"
+            },
+            {
+              id: 6,
+              title: "Logic Building Exercises",
+              description: "Step-by-step practice problems",
+              isRequired: false,
+              url: "https://codecademy.com/learn/logic-building"
+            }
+          ]
         },
-        { 
-          id: 3, 
-          title: "Basic Sorting", 
-          progress: 100, 
-          difficulty: "Easy", 
-          problems: 5, 
-          completedProblems: 5, 
-          locked: false,
-          resources: ["Sorting Algorithms Visualized", "Bubble Sort vs Selection Sort", "Insertion Sort Guide"]
-        },
-        { 
-          id: 4, 
-          title: "Binary Search", 
-          progress: 100, 
-          difficulty: "Medium", 
-          problems: 8, 
-          completedProblems: 8, 
-          locked: false,
-          resources: ["Binary Search Template", "Lower & Upper Bound", "Binary Search Applications"]
+        {
+          id: 3,
+          title: "Functions",
+          status: "available",
+          difficulty: "Medium",
+          description: "Learn to write reusable code with functions, parameters, and return values",
+          problems: [
+            {
+              id: 8,
+              title: "Basic Function Creation",
+              description: "Write functions with different parameter types and return values",
+              difficulty: "Easy",
+              status: "not_started",
+              externalUrl: "https://codewars.com/kata/basic-functions"
+            },
+            { 
+              id: 9, 
+              title: "Function Scope Challenge",
+              description: "Understand local vs global scope and variable accessibility",
+              difficulty: "Medium", 
+              status: "not_started",
+              externalUrl: "https://leetcode.com/problems/function-scope"
+            },
+            { 
+              id: 10, 
+              title: "Higher-Order Functions",
+              description: "Create functions that take other functions as parameters",
+              difficulty: "Hard", 
+              status: "not_started",
+              externalUrl: "https://hackerrank.com/challenges/higher-order-functions"
+            },
+            { 
+              id: 11, 
+              title: "Calculator Project",
+              description: "Build a calculator using functions for each operation",
+              difficulty: "Medium", 
+              status: "not_started",
+              externalUrl: "https://freecodecamp.org/learn/calculator-project"
+            }
+          ],
+          resources: [
+            {
+              id: 7,
+              title: "Functions Fundamentals",
+              description: "Complete guide to writing and using functions",
+              isRequired: true,
+              url: "https://javascript.info/function-basics"
+            },
+            { 
+              id: 8,
+              title: "Function Parameters Deep Dive",
+              description: "Understanding parameters, arguments, and return values",
+              isRequired: true,
+              url: "https://www.youtube.com/watch?v=function-parameters"
+            },
+            {
+              id: 9,
+              title: "Scope and Closures",
+              description: "Advanced concepts about variable scope",
+              isRequired: false,
+              url: "https://javascript.info/closures"
+            }
+          ]
         }
       ]
     },
     {
       id: 2,
       title: "Data Structures",
-      status: "active",
-      problems: 35,
-      completedProblems: 18,
-      description: "Deep dive into essential data structures and their applications",
+      status: "available", 
+      description: "Essential data structures for organizing and manipulating data efficiently",
       topics: [
-        { 
-          id: 5, 
-          title: "Stacks & Queues", 
-          progress: 100, 
-          difficulty: "Easy", 
-          problems: 10, 
-          completedProblems: 10, 
-          locked: false,
-          resources: ["Stack Implementation", "Queue Applications", "Deque Operations"]
+        {
+          id: 4,
+          title: "Arrays",
+          status: "available",
+          difficulty: "Easy",
+          description: "Working with collections of data using arrays and lists",
+          problems: [
+            {
+              id: 12,
+              title: "Array Basics",
+              description: "Create, access, and modify arrays",
+              difficulty: "Easy",
+              status: "not_started",
+              externalUrl: "https://codewars.com/kata/array-basics"
+            },
+            { 
+              id: 13, 
+              title: "Array Searching",
+              description: "Find elements in arrays using different methods",
+              difficulty: "Easy",
+              status: "not_started",
+              externalUrl: "https://leetcode.com/problems/search-in-array"
+            },
+            { 
+              id: 14, 
+              title: "Two Pointer Technique",
+              description: "Solve array problems using two pointers approach",
+              difficulty: "Medium",
+              status: "not_started",
+              externalUrl: "https://leetcode.com/tag/two-pointers/"
+            },
+            { 
+              id: 15, 
+              title: "Array Manipulation Project",
+              description: "Build a todo list application using arrays",
+              difficulty: "Medium",
+              status: "not_started",
+              externalUrl: "https://freecodecamp.org/learn/todo-list-project"
+            }
+          ],
+          resources: [
+            {
+              id: 10,
+              title: "Array Operations Guide",
+              description: "Comprehensive guide to array methods and operations",
+              isRequired: true,
+              url: "https://javascript.info/array"
+            },
+            {
+              id: 11,
+              title: "Array Algorithms Visualized",
+              description: "Visual representation of common array algorithms",
+              isRequired: true,
+              url: "https://www.youtube.com/watch?v=array-algorithms"
+            }
+          ]
         },
-        { 
-          id: 6, 
-          title: "Linked Lists", 
-          progress: 75, 
-          difficulty: "Medium", 
-          problems: 8, 
-          completedProblems: 6, 
-          locked: false,
-          resources: ["Linked List Basics", "Two Pointer in Lists", "Cycle Detection Floyd's Algorithm"]
-        },
-        { 
-          id: 7, 
-          title: "Trees & BST", 
-          progress: 25, 
-          difficulty: "Medium", 
-          problems: 12, 
-          completedProblems: 3, 
-          locked: false,
-          resources: ["Binary Tree Traversal", "BST Operations", "Tree Construction Problems"]
-        },
-        { 
-          id: 8, 
-          title: "Heaps & Priority Queues", 
-          progress: 0, 
-          difficulty: "Hard", 
-          problems: 5, 
-          completedProblems: 0, 
-          locked: false,
-          resources: ["Heap Implementation", "Priority Queue STL", "K-th Largest Element"]
+        {
+          id: 5,
+          title: "Objects & Classes",
+          status: "available",
+          difficulty: "Medium",
+          description: "Object-oriented programming concepts and data modeling",
+          problems: [
+            { 
+              id: 16, 
+              title: "Object Creation Practice",
+              description: "Create objects with properties and methods",
+              difficulty: "Easy",
+              status: "not_started",
+              externalUrl: "https://codewars.com/kata/object-creation"
+            },
+            {
+              id: 17,
+              title: "Class Design Challenge",
+              description: "Design classes for a library management system",
+              difficulty: "Medium",
+              status: "not_started",
+              externalUrl: "https://hackerrank.com/challenges/class-design"
+            },
+            {
+              id: 18,
+              title: "Inheritance Project",
+              description: "Build an animal hierarchy using inheritance",
+              difficulty: "Medium",
+              status: "not_started",
+              externalUrl: "https://freecodecamp.org/learn/inheritance-project"
+            }
+          ],
+          resources: [
+            {
+              id: 12,
+              title: "OOP Principles",
+              description: "Object-oriented programming fundamentals",
+              isRequired: true,
+              url: "https://javascript.info/classes"
+            },
+            {
+              id: 13,
+              title: "Classes and Objects Tutorial",
+              description: "Hands-on guide to creating and using classes",
+              isRequired: true,
+              url: "https://www.youtube.com/watch?v=classes-tutorial"
+            }
+          ]
         }
       ]
     },
     {
       id: 3,
       title: "Algorithms",
-      status: "active",
-      problems: 40,
-      completedProblems: 8,
-      description: "Master fundamental algorithms and optimization techniques",
+      status: "available",
+      description: "Problem-solving with fundamental algorithms and optimization techniques",
       topics: [
         { 
-          id: 9, 
-          title: "Greedy Algorithms", 
-          progress: 60, 
-          difficulty: "Medium", 
-          problems: 10, 
-          completedProblems: 6, 
-          locked: false,
-          resources: ["Greedy Choice Property", "Activity Selection", "Fractional Knapsack"]
-        },
-        { 
-          id: 10, 
-          title: "Dynamic Programming", 
-          progress: 20, 
-          difficulty: "Hard", 
-          problems: 15, 
-          completedProblems: 3, 
-          locked: false,
-          resources: ["DP Patterns", "Memoization vs Tabulation", "Classic DP Problems"]
-        },
-        { 
-          id: 11, 
-          title: "Graph Basics", 
-          progress: 0, 
-          difficulty: "Medium", 
-          problems: 10, 
-          completedProblems: 0, 
-          locked: false,
-          resources: ["Graph Representation", "Adjacency List vs Matrix", "Graph Traversal Basics"]
-        },
-        { 
-          id: 12, 
-          title: "Advanced Sorting", 
-          progress: 0, 
-          difficulty: "Hard", 
-          problems: 5, 
-          completedProblems: 0, 
-          locked: false,
-          resources: ["Merge Sort", "Quick Sort", "Counting Sort"]
-        }
-      ]
-    },
-    {
-      id: 4,
-      title: "Graph Theory",
-      status: "active",
-      problems: 30,
-      completedProblems: 3,
-      description: "Explore graph algorithms and their competitive programming applications",
-      topics: [
-        { 
-          id: 13, 
-          title: "DFS & BFS", 
-          progress: 37, 
-          difficulty: "Medium", 
-          problems: 8, 
-          completedProblems: 3, 
-          locked: false,
-          resources: ["DFS Implementation", "BFS for Shortest Path", "Connected Components"]
-        },
-        { 
-          id: 14, 
-          title: "Shortest Paths", 
-          progress: 0, 
-          difficulty: "Hard", 
-          problems: 8, 
-          completedProblems: 0, 
-          locked: false,
-          resources: ["Dijkstra's Algorithm", "Bellman-Ford", "Floyd-Warshall"]
-        },
-        { 
-          id: 15, 
-          title: "Minimum Spanning Tree", 
-          progress: 0, 
-          difficulty: "Hard", 
-          problems: 6, 
-          completedProblems: 0, 
-          locked: false,
-          resources: ["Kruskal's Algorithm", "Prim's Algorithm", "Union Find"]
-        },
-        { 
-          id: 16, 
-          title: "Network Flows", 
-          progress: 0, 
-          difficulty: "Expert", 
-          problems: 8, 
-          completedProblems: 0, 
-          locked: false,
-          resources: ["Max Flow Min Cut", "Ford-Fulkerson", "Edmonds-Karp"]
-        }
-      ]
-    },
-    {
-      id: 5,
-      title: "Advanced Topics",
-      status: "active",
-      problems: 25,
-      completedProblems: 0,
-      description: "Advanced mathematical and algorithmic concepts for competitive programming",
-      topics: [
-        { 
-          id: 17, 
-          title: "Number Theory", 
-          progress: 0, 
-          difficulty: "Hard", 
-          problems: 8, 
-          completedProblems: 0, 
-          locked: false,
-          resources: ["Prime Numbers", "GCD & LCM", "Modular Arithmetic"]
-        },
-        { 
-          id: 18, 
-          title: "String Algorithms", 
-          progress: 0, 
-          difficulty: "Expert", 
-          problems: 7, 
-          completedProblems: 0, 
-          locked: false,
-          resources: ["KMP Algorithm", "Rabin-Karp", "Suffix Arrays"]
-        },
-        { 
-          id: 19, 
-          title: "Game Theory", 
-          progress: 0, 
-          difficulty: "Expert", 
-          problems: 6, 
-          completedProblems: 0, 
-          locked: false,
-          resources: ["Nim Game", "Minimax Algorithm", "Grundy Numbers"]
-        },
-        { 
-          id: 20, 
-          title: "Computational Geometry", 
-          progress: 0, 
-          difficulty: "Expert", 
-          problems: 4, 
-          completedProblems: 0, 
-          locked: false,
-          resources: ["Convex Hull", "Line Intersection", "Closest Pair of Points"]
+          id: 6,
+          title: "Searching Algorithms",
+          status: "available",
+          difficulty: "Medium",
+          description: "Efficient methods for finding elements in data structures",
+          problems: [
+            { 
+              id: 19, 
+              title: "Linear Search Implementation",
+              description: "Implement linear search from scratch",
+              difficulty: "Easy",
+              status: "not_started",
+              externalUrl: "https://codewars.com/kata/linear-search"
+            },
+            { 
+              id: 20, 
+              title: "Binary Search Challenge",
+              description: "Master binary search and its variations",
+              difficulty: "Medium",
+              status: "not_started",
+              externalUrl: "https://leetcode.com/tag/binary-search/"
+            },
+            {
+              id: 21,
+              title: "Search Algorithm Comparison",
+              description: "Compare performance of different search algorithms",
+              difficulty: "Medium",
+              status: "not_started",
+              externalUrl: "https://hackerrank.com/challenges/search-comparison"
+            }
+          ],
+          resources: [
+            {
+              id: 14,
+              title: "Search Algorithms Explained",
+              description: "Comprehensive guide to search algorithms",
+              isRequired: true,
+              url: "https://geeksforgeeks.org/searching-algorithms"
+            },
+            {
+              id: 15,
+              title: "Binary Search Visualization",
+              description: "Visual explanation of binary search algorithm",
+              isRequired: true,
+              url: "https://www.youtube.com/watch?v=binary-search-visual"
+            }
+          ]
         }
       ]
     }
   ]
+}
+
+// Enhanced helper functions
+export const getTopicProgress = (topic: any, menteeProgress?: any) => {
+  if (!menteeProgress?.topicProgress[topic.id]) return 0
+  
+  const topicProg = menteeProgress.topicProgress[topic.id]
+  const totalProblems = topic.problems.length
+  const completedProblems = Object.values(topicProg.problemProgress || {}).filter(
+    (p: any) => p.status === 'completed'
+  ).length
+  
+  return Math.round((completedProblems / totalProblems) * 100)
+}
+
+export const getPhaseProgress = (phase: any, menteeProgress?: any) => {
+  if (!menteeProgress) return 0
+  
+  const totalProgress = phase.topics.reduce((sum: number, topic: any) => {
+    return sum + getTopicProgress(topic, menteeProgress)
+  }, 0)
+  
+  return Math.round(totalProgress / phase.topics.length)
+}
+
+export const getNextAvailableProblem = (template: RoadmapTemplate, menteeProgress?: any) => {
+  for (const phase of template.phases) {
+    for (const topic of phase.topics) {
+      for (const problem of topic.problems) {
+        const topicProgress = menteeProgress?.topicProgress[topic.id]
+        const problemStatus = topicProgress?.problemProgress[problem.id]?.status || 'not_started'
+        if (problemStatus === 'not_started' || problemStatus === 'in_progress') {
+          return { phase, topic, problem }
+        }
+      }
+    }
+  }
+  return null
 } 

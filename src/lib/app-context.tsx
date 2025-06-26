@@ -4,7 +4,7 @@ import React, { createContext, useContext, useReducer, ReactNode } from 'react'
 import { 
   mockMentees, 
   mockAssignments, 
-  mockSessions,
+  mockSessions, 
   getCurrentMentor,
   type Mentee, 
   type Assignment, 

@@ -167,33 +167,33 @@ export function CreateAssignmentModal({ open, onOpenChange }: CreateAssignmentMo
               />
             </div>
 
-            <div className="space-y-2">
-              <Label className="flex items-center gap-2">
-                <CalendarIcon className="h-4 w-4" />
-                Due Date *
-              </Label>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant="outline"
-                    className={cn(
-                      "w-full justify-start text-left font-normal",
-                      !formData.dueDate && "text-muted-foreground"
-                    )}
-                  >
-                    {formData.dueDate ? format(formData.dueDate, "PPP") : "Pick a date"}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar
-                    mode="single"
-                    selected={formData.dueDate}
-                    onSelect={(date) => handleChange('dueDate', date)}
-                    disabled={(date) => date < new Date()}
-                    initialFocus
-                  />
-                </PopoverContent>
-              </Popover>
+              <div className="space-y-2">
+                <Label className="flex items-center gap-2">
+                  <CalendarIcon className="h-4 w-4" />
+                  Due Date *
+                </Label>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant="outline"
+                      className={cn(
+                        "w-full justify-start text-left font-normal",
+                        !formData.dueDate && "text-muted-foreground"
+                      )}
+                    >
+                      {formData.dueDate ? format(formData.dueDate, "PPP") : "Pick a date"}
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      mode="single"
+                      selected={formData.dueDate}
+                      onSelect={(date) => handleChange('dueDate', date)}
+                      disabled={(date) => date < new Date()}
+                      initialFocus
+                    />
+                  </PopoverContent>
+                </Popover>
             </div>
           </div>
 

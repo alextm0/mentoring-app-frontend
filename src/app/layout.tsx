@@ -24,25 +24,25 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <body className={inter.className}>
-        <AppProvider>
-          {children}
-          <Toaster
-            position="top-right"
-            toastOptions={{
-              duration: 4000,
-              style: {
-                background: 'hsl(var(--background))',
-                color: 'hsl(var(--foreground))',
-                border: '1px solid hsl(var(--border))',
-              },
-            }}
-          />
-          <StagewiseToolbar 
-            config={{
-              plugins: [ReactPlugin]
-            }}
-          />
-        </AppProvider>
+          <AppProvider>
+            {children}
+            <Toaster
+              position="top-right"
+              toastOptions={{
+                duration: 4000,
+                style: {
+                  background: 'hsl(var(--background))',
+                  color: 'hsl(var(--foreground))',
+                  border: '1px solid hsl(var(--border))',
+                },
+              }}
+            />
+            <StagewiseToolbar 
+              config={{
+                plugins: [ReactPlugin]
+              }}
+            />
+          </AppProvider>
       </body>
     </html>
   )
