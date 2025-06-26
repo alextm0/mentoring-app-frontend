@@ -1,0 +1,132 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 7%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 7%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 7%;
+    --primary: 142 76% 36%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 210 40% 98%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 98%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 98%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 142 76% 36%;
+    --radius: 0.5rem;
+
+    /* Dark theme colors */
+    --dark-bg: 220 13% 9%;
+    --dark-card: 220 13% 12%;
+    --dark-border: 220 13% 18%;
+    --neon-green: 142 76% 36%;
+    --neon-green-light: 142 76% 46%;
+    --neon-green-dark: 142 76% 26%;
+    --text-primary: 0 0% 98%;
+    --text-secondary: 0 0% 70%;
+    --text-muted: 0 0% 50%;
+  }
+
+  .dark {
+    --background: var(--dark-bg);
+    --foreground: var(--text-primary);
+    --card: var(--dark-card);
+    --card-foreground: var(--text-primary);
+    --popover: var(--dark-card);
+    --popover-foreground: var(--text-primary);
+    --primary: var(--neon-green);
+    --primary-foreground: 220 13% 9%;
+    --secondary: 220 13% 18%;
+    --secondary-foreground: var(--text-primary);
+    --muted: 220 13% 18%;
+    --muted-foreground: var(--text-muted);
+    --accent: 220 13% 18%;
+    --accent-foreground: var(--text-primary);
+    --destructive: 0 84% 60%;
+    --destructive-foreground: var(--text-primary);
+    --border: var(--dark-border);
+    --input: var(--dark-border);
+    --ring: var(--neon-green);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--dark-bg));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--dark-border));
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--neon-green));
+}
+
+/* Neon glow effects */
+.neon-glow {
+  box-shadow: 0 0 10px hsl(var(--neon-green) / 0.3);
+}
+
+.neon-border {
+  border: 1px solid hsl(var(--neon-green) / 0.3);
+}
+
+.neon-text {
+  color: hsl(var(--neon-green));
+  text-shadow: 0 0 10px hsl(var(--neon-green) / 0.5);
+}
+
+/* Animations */
+@keyframes pulse-neon {
+  0%,
+  100% {
+    box-shadow: 0 0 5px hsl(var(--neon-green) / 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px hsl(var(--neon-green) / 0.6);
+  }
+}
+
+.pulse-neon {
+  animation: pulse-neon 2s ease-in-out infinite;
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-up {
+  animation: slide-up 0.3s ease-out;
+}
