@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react"
 import { motion } from "framer-motion"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -11,12 +12,18 @@ import {
   GraduationCap,
   Award,
   Flame,
-  Star
+  Star,
+  UserMinus
 } from "lucide-react"
 import { getCurrentMentee } from "@/lib/mock-data"
+import { LeaveMentorModal } from "@/components/modals/leave-mentor-modal"
 
 export function MenteeProfile() {
   const mentee = getCurrentMentee()
+  const [showLeaveMentorModal, setShowLeaveMentorModal] = useState(false)
+  
+  // Mock mentor name - in real app, this would come from the mentee's mentor data
+  const mentorName = "Dr. Sarah Wilson"
 
   return (
     <div className="space-y-6">
@@ -113,16 +120,42 @@ export function MenteeProfile() {
                 January 2024
               </div>
             </div>
+            <div>
+              <label className="text-sm font-medium">Current Mentor</label>
+              <div className="mt-1 p-3 bg-muted/30 rounded-lg border flex items-center gap-2">
+                <User className="h-4 w-4 text-primary" />
+                {mentorName}
+              </div>
+            </div>
           </div>
           
-          <div className="pt-4 border-t">
+          <div className="pt-4 border-t flex gap-4">
             <Button className="gap-2">
               <Settings className="h-4 w-4" />
               Edit Profile
             </Button>
+            <Button 
+              variant="outline" 
+              className="gap-2 text-orange-600 border-orange-200 hover:bg-orange-50"
+              onClick={() => setShowLeaveMentorModal(true)}
+            >
+              <UserMinus className="h-4 w-4" />
+              Leave Mentor
+            </Button>
           </div>
         </CardContent>
       </Card>
+
+      {/* Leave Mentor Modal */}
+      <LeaveMentorModal
+        open={showLeaveMentorModal}
+        onOpenChange={setShowLeaveMentorModal}
+        mentorName={mentorName}
+        onMentorLeft={() => {
+          console.log('Mentee left mentor')
+          // In real app, redirect to onboarding or mentor search
+        }}
+      />
     </div>
   )
 } 

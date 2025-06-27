@@ -13,17 +13,20 @@ import {
   MessageSquare, 
   CheckCircle,
   ArrowRight,
-  Target
+  Target,
+  Users
 } from "lucide-react"
 import { useAppContext } from "@/lib/app-context"
 import { ScheduleSessionModal } from "@/components/modals/schedule-session-modal"
 import { CreateAssignmentModal } from "@/components/modals/create-assignment-modal"
+import { AddMenteeModal } from "@/components/modals/add-mentee-modal"
 
 
 export function MentorOverview() {
   const { state } = useAppContext()
   const [showScheduleModal, setShowScheduleModal] = useState(false)
   const [showAssignmentModal, setShowAssignmentModal] = useState(false)
+  const [showAddMenteeModal, setShowAddMenteeModal] = useState(false)
 
   const mentor = state.mentor
       const upcomingMentorshipSession = state.sessions.filter(mentorshipSession =>
@@ -81,6 +84,15 @@ export function MentorOverview() {
                 >
                   <Target className="h-4 w-4" />
                   Create Task
+                </Button>
+                <Button 
+                  size="sm" 
+                  variant="outline" 
+                  className="gap-2"
+                  onClick={() => setShowAddMenteeModal(true)}
+                >
+                  <Users className="h-4 w-4" />
+                  Add Mentee
                 </Button>
               </div>
             </div>
@@ -197,6 +209,11 @@ export function MentorOverview() {
       <CreateAssignmentModal 
         open={showAssignmentModal} 
         onOpenChange={setShowAssignmentModal}
+      />
+      <AddMenteeModal 
+        open={showAddMenteeModal} 
+        onOpenChange={setShowAddMenteeModal}
+        onMenteeAdded={(email) => console.log(`Mentee invitation sent to: ${email}`)}
       />
     </div>
   )

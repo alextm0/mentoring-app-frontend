@@ -53,13 +53,13 @@ export function AppNavigation({ role, user }: AppNavigationProps) {
         { id: 'mentees', label: 'Mentees', icon: Users, href: `/mentor/mentees` },
         { id: 'assignments', label: 'Assignments', icon: FileText, href: `/mentor/assignments` },
         { id: 'sessions', label: 'Mentoring Sessions', icon: Calendar, href: `/mentor/sessions` },
-        { id: 'roadmap', label: 'Roadmap', icon: Map, href: `/mentor/roadmap` },
+        { id: 'problems', label: 'Problem Bank', icon: Trophy, href: `/mentor/problems` },
+        { id: 'resources', label: 'Resource Bank', icon: FileText, href: `/mentor/resources` },
       ]
     : [
         { id: 'overview', label: 'Overview', icon: Home, href: `/mentee` },
         { id: 'assignments', label: 'Assignments', icon: FileText, href: `/mentee/assignments` },
         { id: 'sessions', label: 'Mentoring Sessions', icon: Calendar, href: `/mentee/sessions` },
-        { id: 'roadmap', label: 'Roadmap', icon: Map, href: `/mentee/roadmap` },
       ]
 
   const NavItems = ({ isMobile = false, onItemClick }: { isMobile?: boolean; onItemClick?: () => void }) => (

@@ -53,6 +53,30 @@ export interface MentorshipSession {
   type: 'one-on-one' | 'group' | 'workshop'
 }
 
+// Problem and Resource Bank types for mentors
+export interface BankProblem {
+  id: number
+  title: string
+  description: string
+  difficulty: "Easy" | "Medium" | "Hard"
+  externalUrl: string
+  createdAt: string
+  updatedAt: string
+  mentorId: number
+  solution?: string
+  testCases?: string
+}
+
+export interface BankResource {
+  id: number
+  title: string
+  description: string
+  externalUrl: string
+  createdAt: string
+  updatedAt: string
+  mentorId: number
+}
+
 // Notifications removed for MVP - will be added back with backend 
 
 // Enhanced Roadmap types with problems and resources
